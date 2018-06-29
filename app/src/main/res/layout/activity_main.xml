@@ -3,16 +3,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottomLayout"
+        android:layout_below="@+id/tabLayout" />
+
+
     <com.flyco.tablayout.CommonTabLayout
-        android:id="@+id/tabLayout"
+        android:id="@+id/bottomLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/recyclerView" />
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true" />
 
 </RelativeLayout>

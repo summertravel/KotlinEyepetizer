@@ -6,7 +6,7 @@ import java.io.Serializable
 
 
 data class Banner(
-        public val issueList: ArrayList<Issue>,
+        val issueList: ArrayList<Issue>,
         val nextPageUrl: String,
         val nextPublishTime: Long,
         val newestIssueType: String,
@@ -32,6 +32,7 @@ data class Item(
 
 data class Data(
         val dataType: String,
+        val header: Header,
         val id: Int,
         val title: String,
         val description: String,
@@ -74,6 +75,15 @@ data class Data(
         val lastViewTime: Any,
         val playlists: Any,
         val src: Any
+) : Serializable
+
+
+data class Header(
+        val id: Int,
+        val icon: String,
+        val iconType: String,
+        val followType: String,
+        val issuerName: String
 ) : Serializable
 
 data class PlayInfo(

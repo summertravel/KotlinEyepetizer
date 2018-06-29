@@ -11,7 +11,7 @@ http://baobab.kaiyanapp.com/api/v4/video/related?id=xxx
 http://baobab.kaiyanapp.com/api/v4/categories
 
 //获取分类详情List
-http://baobab.kaiyanapp.com/api/v4/categories/videoList?id=xxx
+http://baobab.kaiyanapp.com/api/v4/categories/videoList?id=24
 
 //获取排行榜的 Info
 http://baobab.kaiyanapp.com/api/v4/rankList
@@ -34,3 +34,13 @@ http://baobab.kaiyanapp.com/api/v4/pgcs/detail/tab?id=1140
 
 //首页推荐
 http://baobab.kaiyanapp.com/api/v5/index/tab/allRec?page=0
+
+//猜你喜欢
+http://baobab.kaiyanapp.com/api/v5/index/tab/allRec?page=0&isTag=false
+
+//关注
+http://baobab.kaiyanapp.com/api/v5/community/tab/list
+//发现
+http://baobab.kaiyanapp.com/api/v5/index/tab/discovery
+//通知
+http://baobab.kaiyanapp.com/api/v3/messages

@@ -2,12 +2,11 @@ package com.summer.kotlineyepetizer.homepage
 
 import com.summer.kotlineyepetizer.base.BasePresenter
 import com.summer.kotlineyepetizer.base.BaseView
-import com.summer.kotlineyepetizer.bean.Banner
-import com.summer.kotlineyepetizer.bean.MaybeULike
+import com.summer.kotlineyepetizer.bean.CategoriesBean
 
-interface HomeContract {
+interface CateContract {
     interface View : BaseView {
-        fun showData(bean: Banner, uLike: MaybeULike)
+        fun showData(bean: ArrayList<CategoriesBean>)
     }
 
     interface Presenter : BasePresenter {

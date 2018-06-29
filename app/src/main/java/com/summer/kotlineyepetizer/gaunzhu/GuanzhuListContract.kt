@@ -1,18 +1,18 @@
-package com.summer.kotlineyepetizer.homepage
+package com.summer.kotlineyepetizer.gaunzhu
 
 import com.summer.kotlineyepetizer.base.BasePresenter
 import com.summer.kotlineyepetizer.base.BaseView
-import com.summer.kotlineyepetizer.bean.Banner
+import com.summer.kotlineyepetizer.bean.DynamicInfoCardBean.Item
 import com.summer.kotlineyepetizer.bean.MaybeULike
 
-interface HomeContract {
+interface GuanzhuListContract {
     interface View : BaseView {
-        fun showData(bean: Banner, uLike: MaybeULike)
+        fun showData(title: ArrayList<MaybeULike.Item>)
+        fun showDynamicInfoCardBeanData(title: ArrayList<Item>)
     }
 
     interface Presenter : BasePresenter {
         fun getData()
     }
-
 
 }

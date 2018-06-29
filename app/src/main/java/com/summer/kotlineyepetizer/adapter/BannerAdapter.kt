@@ -32,14 +32,14 @@ class BannerAdapter : ItemViewBinder<Issue, BannerAdapter.ViewHolder>() {
 
         init {
             recyclerView = view.findViewById(R.id.recyclerView)
+            recyclerView?.layoutManager = LinearLayoutManager(recyclerView?.context, RecyclerView.HORIZONTAL, false)
+            val snapHelper = PagerSnapHelper()
+            snapHelper.attachToRecyclerView(recyclerView)
         }
 
         fun setData(item: Issue) {
             this.item = item
-            recyclerView?.layoutManager = LinearLayoutManager(recyclerView?.context, RecyclerView.HORIZONTAL, false)
             recyclerView?.adapter = HorizitalBanerAdapter(recyclerView!!.context, item.itemList)
-            val snapHelper = PagerSnapHelper()
-            snapHelper.attachToRecyclerView(recyclerView)
         }
 
     }

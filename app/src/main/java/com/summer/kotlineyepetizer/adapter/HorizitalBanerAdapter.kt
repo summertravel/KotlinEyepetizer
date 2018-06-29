@@ -1,28 +1,23 @@
 package com.summer.kotlineyepetizer.adapter
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.support.v4.app.ActivityOptionsCompat
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.RecyclerView.Adapter
-import android.view.Display
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.CircleCrop
-import com.bumptech.glide.request.RequestOptions
 import com.summer.kotlineyepetizer.GlideApp
 import com.summer.kotlineyepetizer.R
-import com.summer.kotlineyepetizer.activity.VideoActivity
-import com.summer.kotlineyepetizer.bean.Banner
-import com.summer.kotlineyepetizer.bean.Issue
-import com.summer.kotlineyepetizer.bean.Item
+import com.summer.kotlineyepetizer.video.VideoActivity
+import com.summer.kotlineyepetizer.bean.*
 import com.summer.kotlineyepetizer.config.Constant
 import com.summer.kotlineyepetizer.util.DisplayUtil
-import org.jetbrains.anko.startActivity
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 
 class HorizitalBanerAdapter(var ctx: Context, private var dataList: ArrayList<Item>) : Adapter<HorizitalBanerAdapter.MyViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -41,12 +36,27 @@ class HorizitalBanerAdapter(var ctx: Context, private var dataList: ArrayList<It
         holder.ivPic!!.layoutParams = params
         holder.ivPic?.setOnClickListener {
             var intent = Intent(ctx, VideoActivity::class.java)
-            intent.putExtra(Constant.DATA, dataList[position].data)
-            ctx.startActivity(intent)
+            var tagList: ArrayList<Tag> = dataList[position]?.data?.tags!!
+            val videoDataBean = Send2VideoDataBean(
+                    dataList[position]?.data?.id.toString()!!,
+                    dataList[position]?.data?.playUrl,
+                    dataList[position]?.data?.cover.blurred,
+                    dataList[position]?.data?.title,
+                    dataList[position]?.data?.description,
+                    dataList[position]?.data?.author.name,
+                    dataList[position]?.data?.author.description,
+                    dataList[position]?.data?.consumption.collectionCount.toString(),
+                    dataList[position]?.data?.consumption.shareCount.toString(),
+                    dataList[position]?.data?.consumption.replyCount.toString(),
+                    dataList[position]?.data?.author.icon,
+                    tagList)
+            intent.putExtra(Constant.DATA, videoDataBean)
+            val optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(ctx as Activity, holder.ivPic!!, "image")
+            ctx.startActivity(intent, optionsCompat.toBundle())
         }
         holder.tvPage?.text = (position + 1).toString() + "/" + dataList.size
         holder.tvSlogan?.text = dataList[position].data.slogan
-        Glide.with(ctx).load(dataList[position].data.cover.detail).into(holder.ivPic!!)
+        GlideApp.with(ctx).load(dataList[position].data.cover.detail).skipMemoryCache(true).transform(RoundedCornersTransformation(15, 5)).into(holder.ivPic!!)
         GlideApp.with(ctx).load(dataList[position].data.author.icon).circleCrop().into(holder.ivAuthor!!)
     }
 
