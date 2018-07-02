@@ -2,27 +2,23 @@ package com.summer.kotlineyepetizer.homepage
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentPagerAdapter
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.summer.kotlineyepetizer.GlideApp
 import com.summer.kotlineyepetizer.R
 import com.summer.kotlineyepetizer.adapter.BannerAdapter
 import com.summer.kotlineyepetizer.adapter.ListAdapter
 import com.summer.kotlineyepetizer.bean.Banner
 import com.summer.kotlineyepetizer.bean.Issue
 import com.summer.kotlineyepetizer.bean.MaybeULike
-import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.fragment_home_list.*
 import me.drakeet.multitype.Items
 import me.drakeet.multitype.MultiTypeAdapter
-import com.summer.kotlineyepetizer.GlideApp
-import com.summer.kotlineyepetizer.bean.CategoriesBean
 
 
 class HomeListFragment : Fragment(), HomeContract.View {
-    var rootView: View? = null
-
     override fun showData(bean: Banner, uLike: MaybeULike) {
 
         var dataList = bean.issueList[0].itemList
@@ -47,8 +43,7 @@ class HomeListFragment : Fragment(), HomeContract.View {
     private var multiTypeAdapter: MultiTypeAdapter? = null
     private var mPresenter: HomePresenter? = null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        rootView = inflater.inflate(R.layout.fragment_home_list, container, false)
-        return rootView
+        return inflater.inflate(R.layout.fragment_home_list, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -58,8 +53,8 @@ class HomeListFragment : Fragment(), HomeContract.View {
         multiTypeAdapter = MultiTypeAdapter()
         multiTypeAdapter!!.register(Issue::class.java, BannerAdapter())
         multiTypeAdapter!!.register(MaybeULike.Item::class.java, ListAdapter(this))
-        recyclerView.adapter = multiTypeAdapter
         multiTypeAdapter!!.items = items as Items
+        recyclerView.adapter = multiTypeAdapter
         mPresenter = HomePresenter(this)
         mPresenter?.getData()
     }

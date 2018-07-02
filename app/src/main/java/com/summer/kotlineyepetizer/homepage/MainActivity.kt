@@ -3,12 +3,14 @@ package com.summer.kotlineyepetizer.homepage
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentPagerAdapter
+import android.support.v4.app.FragmentStatePagerAdapter
 import android.support.v4.view.ViewPager
 import com.flyco.tablayout.listener.CustomTabEntity
 import com.flyco.tablayout.listener.OnTabSelectListener
 import com.summer.kotlineyepetizer.R
 import com.summer.kotlineyepetizer.base.BaseActivity
 import com.summer.kotlineyepetizer.gaunzhu.GuanzhuFragment
+import com.summer.kotlineyepetizer.message.MessageFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
@@ -63,6 +65,7 @@ class MainActivity : BaseActivity() {
         var fragmentList = ArrayList<Fragment>()
         fragmentList.add(HomeFragment())
         fragmentList.add(GuanzhuFragment())
+        fragmentList.add(MessageFragment())
         viewPager.addOnPageChangeListener(object :ViewPager.OnPageChangeListener{
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
             }
@@ -75,7 +78,7 @@ class MainActivity : BaseActivity() {
             }
 
         })
-        viewPager.adapter = object : FragmentPagerAdapter(supportFragmentManager) {
+        viewPager.adapter = object : FragmentStatePagerAdapter(supportFragmentManager) {
             override fun getItem(position: Int): Fragment {
                 return fragmentList[position]
             }

@@ -3,6 +3,7 @@ package com.summer.kotlineyepetizer.gaunzhu
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentPagerAdapter
+import android.support.v4.app.FragmentStatePagerAdapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +19,7 @@ class GuanzhuFragment : Fragment(), GuanzhuContract.View {
             title.add(tab[i].name)
             fragmentList.add(GuanzhuListFragment(i,tab[i].apiUrl))
         }
-        viewPager.adapter = object : FragmentPagerAdapter(childFragmentManager) {
+        viewPager.adapter = object : FragmentStatePagerAdapter(childFragmentManager) {
             override fun getItem(position: Int): Fragment {
                 return fragmentList[position]
             }

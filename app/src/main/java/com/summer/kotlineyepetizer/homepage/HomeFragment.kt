@@ -3,6 +3,7 @@ package com.summer.kotlineyepetizer.homepage
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentPagerAdapter
+import android.support.v4.app.FragmentStatePagerAdapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,7 +22,7 @@ class HomeFragment : Fragment(), CateContract.View {
             title.add(bean[i].name)
             fragmentList.add(HomeListFragment())
         }
-        viewPager.adapter = object : FragmentPagerAdapter(childFragmentManager) {
+        viewPager.adapter = object : FragmentStatePagerAdapter(childFragmentManager) {
             override fun getItem(position: Int): Fragment {
                 return fragmentList[position]
             }

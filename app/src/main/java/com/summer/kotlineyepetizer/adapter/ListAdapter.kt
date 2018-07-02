@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import com.bumptech.glide.request.RequestOptions
 import com.summer.kotlineyepetizer.GlideApp
 import com.summer.kotlineyepetizer.R
@@ -18,8 +19,12 @@ import com.summer.kotlineyepetizer.bean.MaybeULike
 import com.summer.kotlineyepetizer.bean.Send2VideoDataBean
 import com.summer.kotlineyepetizer.bean.Tag
 import com.summer.kotlineyepetizer.config.Constant
+import com.transitionseverywhere.Crossfade
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 import me.drakeet.multitype.ItemViewBinder
+import android.animation.ObjectAnimator
+
+
 
 class ListAdapter(var context: Fragment) : ItemViewBinder<MaybeULike.Item, ListAdapter.ViewHolder>() {
 
@@ -31,7 +36,7 @@ class ListAdapter(var context: Fragment) : ItemViewBinder<MaybeULike.Item, ListA
         holder.setData(item, context)
     }
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class ViewHolder(var view: View) : RecyclerView.ViewHolder(view) {
         var tvTitle: TextView? = null
         var tvDesc: TextView? = null
         var ivPic: ImageView? = null
@@ -70,7 +75,9 @@ class ListAdapter(var context: Fragment) : ItemViewBinder<MaybeULike.Item, ListA
         fun setData(item: MaybeULike.Item, context: Fragment?) {
             this.item = item
             GlideApp.with(context!!).load(item.data.content.data.cover.detail)
-                    .apply(RequestOptions.bitmapTransform(RoundedCornersTransformation(30, 0)))
+                    .skipMemoryCache(true)
+                    .transition(withCrossFade(1000))
+                    .apply(RequestOptions.bitmapTransform(RoundedCornersTransformation(15, 0)))
                     .into(ivPic!!)
             GlideApp.with(context!!).load(item.data.content.data.author.icon).circleCrop().into(ivAuthor!!)
             tvTitle!!.text = item.data.content.data.title

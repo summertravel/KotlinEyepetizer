@@ -8,12 +8,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.summer.kotlineyepetizer.R
-import com.summer.kotlineyepetizer.R.id.recyclerView
 import com.summer.kotlineyepetizer.adapter.DynamicInfoCardListAdapter
 import com.summer.kotlineyepetizer.adapter.ListAdapter
 import com.summer.kotlineyepetizer.bean.DynamicInfoCardBean
 import com.summer.kotlineyepetizer.bean.MaybeULike
-import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.fragment_zuopin.*
 import me.drakeet.multitype.Items
 import me.drakeet.multitype.MultiTypeAdapter
 
@@ -37,8 +36,8 @@ class GuanzhuListFragment(var index: Int, val apiUrl: String) : Fragment(), Guan
             multiTypeAdapter!!.register(MaybeULike.Item::class.java, ListAdapter(this))
         else
             multiTypeAdapter!!.register(DynamicInfoCardBean.Item::class.java, DynamicInfoCardListAdapter(this))
-        recyclerView.adapter = multiTypeAdapter
         multiTypeAdapter!!.items = items as Items
+        recyclerView.adapter = multiTypeAdapter
         GuanZhuListPresenter(index, this, apiUrl).getData()
     }
 
