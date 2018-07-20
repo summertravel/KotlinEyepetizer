@@ -11,6 +11,7 @@ import com.summer.kotlineyepetizer.R
 import com.summer.kotlineyepetizer.base.BaseActivity
 import com.summer.kotlineyepetizer.gaunzhu.GuanzhuFragment
 import com.summer.kotlineyepetizer.message.MessageFragment
+import com.summer.kotlineyepetizer.my.MyFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
@@ -54,7 +55,7 @@ class MainActivity : BaseActivity() {
         bottomLayout.textUnselectColor = R.color.gray
         bottomLayout.setOnTabSelectListener(object : OnTabSelectListener {
             override fun onTabSelect(position: Int) {
-                viewPager.currentItem = position
+                viewPager.setCurrentItem(position,false)
             }
 
             override fun onTabReselect(position: Int) {
@@ -66,18 +67,8 @@ class MainActivity : BaseActivity() {
         fragmentList.add(HomeFragment())
         fragmentList.add(GuanzhuFragment())
         fragmentList.add(MessageFragment())
-        viewPager.addOnPageChangeListener(object :ViewPager.OnPageChangeListener{
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
-            }
+        fragmentList.add(MyFragment())
 
-            override fun onPageSelected(position: Int) {
-                bottomLayout.currentTab = position
-            }
-
-            override fun onPageScrollStateChanged(state: Int) {
-            }
-
-        })
         viewPager.adapter = object : FragmentStatePagerAdapter(supportFragmentManager) {
             override fun getItem(position: Int): Fragment {
                 return fragmentList[position]

@@ -17,7 +17,7 @@ class GuanzhuFragment : Fragment(), GuanzhuContract.View {
         var fragmentList = ArrayList<Fragment>()
         for (i in tab.indices) {
             title.add(tab[i].name)
-            fragmentList.add(GuanzhuListFragment(i,tab[i].apiUrl))
+            fragmentList.add(GuanzhuListFragment.getInstance(i,tab[i].apiUrl))
         }
         viewPager.adapter = object : FragmentStatePagerAdapter(childFragmentManager) {
             override fun getItem(position: Int): Fragment {

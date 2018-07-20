@@ -16,8 +16,18 @@ import kotlinx.android.synthetic.main.fragment_zuopin.*
 import me.drakeet.multitype.Items
 import me.drakeet.multitype.MultiTypeAdapter
 
-@SuppressLint("ValidFragment")
-class GuanzhuListFragment(var index: Int, val apiUrl: String) : Fragment(), GuanzhuListContract.View {
+class GuanzhuListFragment : Fragment(), GuanzhuListContract.View {
+
+    companion object {
+        fun getInstance(index: Int, apiUrl: String): GuanzhuListFragment {
+            val fragment = GuanzhuListFragment()
+            val bundle = Bundle()
+            bundle.putString("url", apiUrl)
+            bundle.putInt("index", index)
+            fragment.arguments = bundle
+            return fragment
+        }
+    }
 
     private var items: Items? = null
     private var multiTypeAdapter: MultiTypeAdapter? = null
@@ -28,7 +38,8 @@ class GuanzhuListFragment(var index: Int, val apiUrl: String) : Fragment(), Guan
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        val apiUrl = arguments!!["url"] as String
+        val index = arguments!!["index"] as Int
         items = Items()
         recyclerView.layoutManager = LinearLayoutManager(context)
         multiTypeAdapter = MultiTypeAdapter()

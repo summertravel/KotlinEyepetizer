@@ -2,12 +2,12 @@ package com.summer.kotlineyepetizer.homepage
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentPagerAdapter
 import android.support.v4.app.FragmentStatePagerAdapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.summer.kotlineyepetizer.R
+
 import com.summer.kotlineyepetizer.bean.CategoriesBean
 import kotlinx.android.synthetic.main.fragment_home.*
 
@@ -51,5 +51,6 @@ class HomeFragment : Fragment(), CateContract.View {
         val catePresenter = CatePresenter(this)
         catePresenter.getData()
     }
+
 
 }
